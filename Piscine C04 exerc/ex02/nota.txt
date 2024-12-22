@@ -1,0 +1,32 @@
+Exatamente! Quando você chama a função `ft_putnbr` de forma recursiva, uma pilha de chamadas (stack) é criada para armazenar o estado de cada chamada. Vamos detalhar como isso funciona na primeira e na segunda chamada da função, usando o exemplo de `ft_putnbr(45)`.
+
+### Análise da Recursão
+
+1. **Primeira chamada: `ft_putnbr(45)`**
+   - `bigger` é inicializado como `45`.
+   - `bigger` não é negativo, então o programa não imprime `'-'`.
+   - A condição `bigger / 10 != 0` é verdadeira, então `ft_putnbr(bigger / 10)` é chamada, ou seja, `ft_putnbr(4)`.
+
+2. **Segunda chamada: `ft_putnbr(4)`**
+   - Agora `bigger` é `4`.
+   - Novamente, `bigger` não é negativo, então o programa não imprime `'-'`.
+   - A condição `bigger / 10 != 0` é falsa (`4 / 10` é `0`), então a função não chama a si mesma novamente e avança para a próxima linha.
+   - Aqui, `ft_putchar(bigger % 10 + '0')` é chamado, ou seja, `ft_putchar(4 + '0')`, o que resulta na impressão do caractere `'4'`.
+
+### Retorno para a Primeira Chamada
+
+3. **Retorno à primeira chamada: `ft_putnbr(45)`**
+   - Após a segunda chamada terminar e imprimir `4`, o controle retorna à primeira chamada (`ft_putnbr(45)`).
+   - Agora, após a chamada recursiva, a linha `ft_putchar(bigger % 10 + '0')` é executada. Aqui, `bigger` ainda é `45`, e o cálculo `bigger % 10` resulta em `5`.
+   - Assim, `ft_putchar(5 + '0')` é chamado, resultando na impressão do caractere `'5'`.
+
+### Resumo da Pilha
+
+- **Pilha de chamadas**:
+  - Quando `ft_putnbr(45)` é chamado, uma nova entrada é adicionada à pilha.
+  - Em seguida, `ft_putnbr(4)` é chamado, criando outra entrada na pilha.
+  - Após `ft_putnbr(4)` concluir (imprimindo `4`), ela sai da pilha e o controle retorna a `ft_putnbr(45)`, onde `5` é impresso.
+  
+O resultado final impresso na tela é `45`, e a pilha é esvaziada conforme cada chamada é finalizada, seguindo a ordem inversa da chamada original.
+
+Se você tiver mais perguntas sobre como a recursão funciona ou sobre outros aspectos da Linguagem C, fique à vontade para perguntar!

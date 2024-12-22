@@ -1,0 +1,117 @@
+O exercício pede para que você implemente a função `ft_strstr`, que é semelhante à função padrão `strstr` da biblioteca de C. Essa função é usada para encontrar a primeira ocorrência de uma substring (`to_find`) dentro de uma string (`str`). Se a substring for encontrada, a função deve retornar um ponteiro para a posição da primeira ocorrência; caso contrário, deve retornar `NULL`.
+
+### Passos para Implementar `ft_strstr`
+
+Vamos dividir a implementação em partes para facilitar o entendimento.
+
+#### 1. Prototipagem da Função
+
+A função deve ser prototipada conforme o enunciado:
+
+```c
+char *ft_strstr(char *str, char *to_find);
+```
+
+#### 2. Analisando os Parâmetros
+
+- `str`: A string onde você vai procurar a substring.
+- `to_find`: A substring que você deseja localizar dentro de `str`.
+
+#### 3. Retornos Possíveis
+
+- Se `to_find` for uma string vazia, a função deve retornar `str` (por definição, uma string vazia é considerada encontrada no início de qualquer string).
+- Se `to_find` não for encontrada em `str`, deve retornar `NULL`.
+
+#### 4. Algoritmo para Encontrar a Substring
+
+O algoritmo geral para a função pode ser descrito assim:
+
+1. **Iterar sobre cada caractere de `str`**.
+2. Para cada caractere, verificar se a substring `to_find` começa a partir daquela posição.
+3. Se encontrar a substring, retorne o ponteiro para essa posição.
+4. Se a string terminar sem encontrar a substring, retorne `NULL`.
+
+### Implementação da Função
+
+Aqui está um exemplo de como a função pode ser implementada:
+
+```c
+#include <stddef.h> // Para NULL
+
+char *ft_strstr(char *str, char *to_find)
+{
+    // Se to_find é uma string vazia, retorne str
+    if (*to_find == '\0')
+        return str;
+
+    // Itera sobre cada caractere de str
+    while (*str)
+    {
+        char *s1 = str;       // Ponteiro para a posição atual em str
+        char *s2 = to_find;   // Ponteiro para a posição atual em to_find
+
+        // Compara os caracteres enquanto ambos não atingirem o final
+        while (*s2 && (*s1 == *s2))
+        {
+            s1++;
+            s2++;
+        }
+
+        // Se s2 alcançou o fim de to_find, significa que encontramos a substring
+        if (*s2 == '\0')
+            return str;
+
+        str++; // Move para o próximo caractere de str
+    }
+
+    return NULL; // Se não encontramos a substring
+}
+```
+
+### Explicação do Código
+
+1. **Checagem da String Vazia**: 
+   ```c
+   if (*to_find == '\0')
+       return str;
+   ```
+   - Se `to_find` é uma string vazia, retorna `str`.
+
+2. **Loop Principal**: 
+   ```c
+   while (*str)
+   ```
+   - Itera sobre cada caractere de `str` até o final da string.
+
+3. **Comparação**: 
+   ```c
+   char *s1 = str;
+   char *s2 = to_find;
+   while (*s2 && (*s1 == *s2))
+   ```
+   - Define dois ponteiros, um para `str` e outro para `to_find`. Compara os caracteres de ambos enquanto eles forem iguais.
+
+4. **Verificação da Substring**: 
+   ```c
+   if (*s2 == '\0')
+       return str;
+   ```
+   - Se o ponteiro `s2` chega ao final de `to_find`, significa que encontramos a substring em `str`, então retornamos o ponteiro `str`.
+
+5. **Avançando a String**: 
+   ```c
+   str++;
+   ```
+   - Se a comparação não foi bem-sucedida, avançamos o ponteiro `str` para a próxima posição e continuamos a busca.
+
+6. **Retorno Final**: 
+   ```c
+   return NULL;
+   ```
+   - Se não encontramos `to_find` em `str`, retornamos `NULL`.
+
+### Resumo
+
+A função `ft_strstr` implementa a lógica da busca de uma substring em uma string, usando ponteiros para comparar cada caractere. Essa implementação é eficiente e direta, seguindo o mesmo comportamento da função padrão `strstr`.
+
+Se você tiver mais perguntas sobre esse exercício ou outros aspectos da linguagem C, estou à disposição!
